@@ -1,12 +1,15 @@
 using FactoryPattern.Components;
 using FactoryPattern.Samples;
+using FactoryPattern.Factories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-builder.Services.AddTransient<ISample1, Sample1>();
+//builder.Services.AddTransient<ISample1, Sample1>();
+//builder.Services.AddSingleton<Func<ISample1>>(x => () => x.GetService<ISample1>()!);
+builder.Services.AddAbstractFactory<ISample1, Sample1>();
 
 var app = builder.Build();
 
